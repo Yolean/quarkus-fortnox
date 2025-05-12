@@ -34,6 +34,6 @@ public class FortnoxSchemaHacksTest {
 
     // Assert that getDefaultDeliveryTypes() returns the empty string
     assertEquals(FortnoxCustomerDefaultDeliveryTypes.InvoiceEnum.ELECTRONICINVOICE, customer.getDefaultDeliveryTypes().getInvoice(),
-        "DefaultDeliveryTypes should be an empty string after being set to empty.");
+        "DefaultDeliveryTypes.Invoice should be ELECTRONICINVOICE after being set to ELECTRONICINVOICE.");
   }
 }
