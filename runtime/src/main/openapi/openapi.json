@@ -5539,6 +5539,7 @@
         "properties": {
           "Invoice": {
             "enum": [
+              "ELECTRONICINVOICE",
               "PRINT",
               "EMAIL",
               "PRINTSERVICE"
@@ -7081,7 +7082,8 @@
             "enum": [
               "CASH",
               "CARD",
-              "AG"
+              "AG",
+              ""
             ],
             "type": "string"
           },
