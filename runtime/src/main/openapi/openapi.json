@@ -5539,6 +5539,7 @@
         "properties": {
           "Invoice": {
             "enum": [
+              "ELECTRONICINVOICE",
               "PRINT",
               "EMAIL",
               "PRINTSERVICE"
@@ -7081,7 +7082,8 @@
             "enum": [
               "CASH",
               "CARD",
-              "AG"
+              "AG",
+              ""
             ],
             "type": "string"
           },
@@ -12785,7 +12787,8 @@
             "type": "number"
           },
           "PaymentMethodAccount": {
-            "type": "string"
+            "format": "int32",
+            "type": "integer"
           },
           "PaymentMethodCode": {
             "type": "string"
@@ -12802,6 +12805,14 @@
           "PaymentMethodCode",
           "ReportToFinance"
         ],
+        "type": "object"
+      },
+      "fortnox_ReportPaymentPayload_Wrap": {
+        "properties": {
+          "NoxFinansInvoice": {
+            "$ref": "#/components/schemas/fortnox_ReportPaymentPayload"
+          }
+        },
         "type": "object"
       },
       "fortnox_SalaryTransaction": {
@@ -17766,7 +17777,7 @@
       },
       "get": {
         "description": "Retrieves a specific transaction",
-        "operationId": "1_get",
+        "operationId": "get",
         "parameters": [
           {
             "description": "identifies the transaction",
@@ -17808,7 +17819,7 @@
         "x-fn-is-public": "true"
       },
       "put": {
-        "operationId": "1_update",
+        "operationId": "update",
         "parameters": [
           {
             "description": "identifies the transaction",
@@ -17984,7 +17995,7 @@
     "/3/accounts": {
       "get": {
         "description": "The accounts are returned sorted by account number with the lowest number appearing first.",
-        "operationId": "1_list_2",
+        "operationId": "list_2",
         "parameters": [
           {
             "in": "query",
@@ -18043,7 +18054,7 @@
       },
       "post": {
         "description": "The created account will be returned if everything succeeded, if there was any problems an error will be returned.",
-        "operationId": "create_1",
+        "operationId": "1_create_1",
         "parameters": [
           {
             "description": "financial year to create account against",
@@ -18134,7 +18145,7 @@
       },
       "get": {
         "description": "Retrieves the details of an account. You need to supply the unique account number that was returned when the account was created or retrieved from the list of accounts.",
-        "operationId": "1_get_2",
+        "operationId": "get_2",
         "parameters": [
           {
             "description": "identifies the account",
@@ -18177,7 +18188,7 @@
       },
       "put": {
         "description": "Updates the specified account with the values provided in the properties. Any property not provided will be left unchanged.\n Note that even though the account number is writeable you can&acute;t change the number of an existing account.",
-        "operationId": "1_update_1",
+        "operationId": "update_1",
         "parameters": [
           {
             "description": "identifies the account",
@@ -18508,7 +18519,7 @@
         "x-fn-is-public": "true"
       },
       "post": {
-        "operationId": "create_2",
+        "operationId": "1_create_2",
         "requestBody": {
           "content": {
             "*/*": {
@@ -18752,7 +18763,7 @@
       },
       "post": {
         "description": "The created article will be returned if everything succeeded, if there was any problems an error will be returned.",
-        "operationId": "1_create_3",
+        "operationId": "create_3",
         "requestBody": {
           "content": {
             "*/*": {
@@ -18832,7 +18843,7 @@
       },
       "get": {
         "description": "Retrieves the details of an article. You need to supply the unique article number that was returned when the article was created or retrieved from the list of articles.",
-        "operationId": "get_4",
+        "operationId": "1_get_4",
         "parameters": [
           {
             "description": "identifies the article",
@@ -18875,7 +18886,7 @@
       },
       "put": {
         "description": "Updates the specified article with the values provided in the properties. Any property not provided will be left unchanged.\n You need to supply the unique article number that was returned when the article was created or retrieved from the list of articles.\n Note that even though the article number is writeable you can not change the number of an existing article.",
-        "operationId": "update_2",
+        "operationId": "1_update_2",
         "parameters": [
           {
             "description": "identifies the article",
@@ -18961,7 +18972,7 @@
         "x-fn-is-public": "true"
       },
       "post": {
-        "operationId": "1_create_5",
+        "operationId": "create_5",
         "requestBody": {
           "content": {
             "*/*": {
@@ -19678,7 +19689,7 @@
         "x-fn-is-public": "true"
       },
       "post": {
-        "operationId": "1_create_8",
+        "operationId": "create_8",
         "parameters": [
           {
             "description": "id",
@@ -20087,7 +20098,7 @@
         "x-fn-is-public": "true"
       },
       "post": {
-        "operationId": "1_create_9",
+        "operationId": "create_9",
         "requestBody": {
           "content": {
             "*/*": {
@@ -20361,7 +20372,7 @@
     },
     "/3/companyinformation": {
       "get": {
-        "operationId": "get_11",
+        "operationId": "1_get_11",
         "responses": {
           "200": {
             "content": {
@@ -20424,7 +20435,7 @@
         "x-fn-is-public": "true"
       },
       "post": {
-        "operationId": "create_10",
+        "operationId": "1_create_10",
         "requestBody": {
           "content": {
             "*/*": {
@@ -20644,7 +20655,7 @@
         "x-fn-is-public": "true"
       },
       "post": {
-        "operationId": "1_create_11",
+        "operationId": "create_11",
         "requestBody": {
           "content": {
             "*/*": {
@@ -21394,7 +21405,7 @@
         "x-fn-is-public": "true"
       },
       "get": {
-        "operationId": "get_17",
+        "operationId": "1_get_17",
         "parameters": [
           {
             "description": "identifies currency",
@@ -24670,7 +24681,7 @@
     },
     "/3/noxfinansinvoices/{Number}/report-payment": {
       "put": {
-        "description": "<p>\n If a customer has paid some or all of the capital on an invoice directly to the client, this can be reported\n for bookkeeping purposes and reported to Fortnox Finans to actually deduct the paid amount from the invoice.\n <p>\n <b>Note:</b> this action is <b>not</b> available for invoices sent by the old Noxbox platform\n <p>\n <i>Parameters in the body:</i>\n <ul>\n     <li><b>ClientTakesFees</b>: a boolean indicating if the client should take the customer fees or not.</li>\n     <li><b>BookkeepPaymentInFortnox</b>: a boolean indicating if the payment should be bookkept in Fortnox or not. Usually the payment should be bookkept.</li>\n     <li><b>ReportToFinance</b>: a boolean indicating if the payment should be reported to Fortnox Finans or not. Usually the payment should be reported.</li>\n     <li><b>PaymentAmount</b>: a decimal field with the amount to report.</li>\n     <li><b>PaymentMethodCode</b>: a string with the method code (e.g. BG, PG or other). Could be omitted if BookkeepPaymentInFortnox is false.</li>\n     <li><b>PaymentMethodAccount</b>: an integer with the account number to bookkeep the payment on (e.g. 1920 or other). Could be omitted if BookkeepPaymentInFortnox is false.</li>\n </ul>\n <p>",
+        "description": "<p>\n If a customer has paid some or all of the capital on an invoice directly to the client, this can be reported\n for bookkeeping purposes and reported to Fortnox Finans to actually deduct the paid amount from the invoice.\n <p>\n <b>Note:</b> this action is <b>not</b> available for invoices sent by the old Noxbox platform\n <p>\n <i>Parameters in the body:</i>\n <ul>\n     <li><b>PaymentAmount</b>: a decimal field with the amount to report.</li>\n     <li><b>PaymentMethodCode</b>: a string with the method code (e.g. BG, PG or other). Could be omitted if BookkeepPaymentInFortnox is false.</li>\n     <li><b>PaymentMethodAccount</b>: an integer with the account number to bookkeep the payment on (e.g. 1920 or other). Could be omitted if BookkeepPaymentInFortnox is false.</li>\n     <li><b>ClientTakesFees</b>: a boolean indicating if the client should take the customer fees or not.</li>\n     <li><b>BookkeepPaymentInFortnox</b>: a boolean indicating if the payment should be bookkept in Fortnox or not. Usually the payment should be bookkept.</li>\n     <li><b>ReportToFinance</b>: a boolean indicating if the payment should be reported to Fortnox Finans or not. Usually the payment should be reported.</li>\n </ul>\n <p>",
         "operationId": "reportPayment",
         "parameters": [
           {
@@ -24687,7 +24698,7 @@
           "content": {
             "*/*": {
               "schema": {
-                "$ref": "#/components/schemas/fortnox_ReportPaymentPayload"
+                "$ref": "#/components/schemas/fortnox_ReportPaymentPayload_Wrap"
               }
             }
           },
@@ -31288,7 +31299,7 @@
     "/api/time/registrations-v2": {
       "get": {
         "description": "<p>\n <b>Response property descriptions:</b><br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>id</i></b> - The unique id of the registration.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>userId</i></b> - The user ID who owns the registration.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>workedDate</i></b> - The date for which the registration is created.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>workedHours</i></b> - The time spent, or the time of absence.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>startTime</i></b> - The start of clock time.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>stopTime</i></b> - The end of clock time.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>invoiceText</i></b> - The text to be included in the invoice/order basis which would be used to create an invoice/order.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>note</i></b> - The note on the registration.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>chargeHours</i></b> - The time to be invoiced, or 0 for the absence, or locked for non-invoiceable.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>childId</i></b> - The child ID related to the absence registration of parental leave (FPE), which comes from Payroll application.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>nonInvoiceable</i></b> - If the registration would be ignored for charging or not.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>invoiceBasisId</i></b> - The ID of invoice/order basis which is used for creating an invoice/order.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>documentId</i></b> - The document ID which includes the registration and is created in Invoicing application.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>documentType</i></b> - The document type which could be \"invoice\" or \"order\".<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>unitCost</i></b> - The unit cost from the registration owner who takes the work.<br/>\n &nbsp;&nbsp;&nbsp;&nbsp;    <b><i>unitPrice</i></b> - The unit price for the service on the registration, which comes in priority from \"invoice/order basis\", \"price group\" or \"service\".\n <p>",
-        "operationId": "list_2",
+        "operationId": "1_list_2",
         "parameters": [
           {
             "description": "The start date of the search span, the max of which should be 1 year to the end date (\"toDate\").\n Example: 2022-11-01",
@@ -31583,7 +31594,7 @@
     },
     "/api/warehouse/deliveries-v1/inbounddeliveries/{id}": {
       "get": {
-        "operationId": "get",
+        "operationId": "1_get",
         "parameters": [
           {
             "description": "Manual Inbound document id.",
@@ -31672,7 +31683,7 @@
         "x-fn-is-public": "true"
       },
       "put": {
-        "operationId": "update",
+        "operationId": "1_update",
         "parameters": [
           {
             "description": "Manual Inbound document id.",
@@ -31821,7 +31832,7 @@
     "/api/warehouse/deliveries-v1/outbounddeliveries": {
       "post": {
         "description": "<p>\n The <code>id</code> is set automatically.",
-        "operationId": "1_create_1",
+        "operationId": "create_1",
         "requestBody": {
           "content": {
             "application/json": {
@@ -31954,7 +31965,7 @@
       },
       "put": {
         "description": "<p>\n HTTP code 400 cannot_modify_released_document\n HTTP code 400 document_is_voided Document is voided.\n HTTP code 404 not found",
-        "operationId": "update_1",
+        "operationId": "1_update_1",
         "parameters": [
           {
             "description": "Manual Outbound document id.",
@@ -32124,7 +32135,7 @@
       },
       "post": {
         "description": "Create type, if it doesn't already exists. Note that new custom document types are\n created automatically when you create custom documents, so normally\n you do not need to call this method.\n\n Throws HTTP 400 <code>referenceTypeNotAllowed</code> if the name of the type is not allowed.",
-        "operationId": "create_8",
+        "operationId": "1_create_8",
         "requestBody": {
           "content": {
             "application/json": {
@@ -32168,7 +32179,7 @@
     },
     "/api/warehouse/documentdeliveries/custom/documenttypes-v1/{type}": {
       "get": {
-        "operationId": "1_get_11",
+        "operationId": "get_11",
         "parameters": [
           {
             "description": "the name of the reference type",
@@ -32736,7 +32747,7 @@
         "x-fn-is-public": "true"
       },
       "post": {
-        "operationId": "create_9",
+        "operationId": "1_create_9",
         "requestBody": {
           "content": {
             "*/*": {
@@ -33120,7 +33131,7 @@
       },
       "post": {
         "description": "<p>\n Set <code>itemId</code> to the item to be produced.\n <p>\n Set <code>quantity</code> to number of units to produce.\n <p>\n Set <code>startDate</code> to production start state.\n <p>\n ProductionState is set to <code>reserved</code> by default.\n It can also be <code>registered</code>. Then no reservations\n will be made (no quantities will be assigned to the <code>packageItems</code> yet).\n <p>\n Setting <code>outboundStockPointId</code> (where the <code>packageItems</code>\n will be taken from), and <code>inboundStockPointId</code> (where the\n produced item will be put) is mandatory multiple stockpoints has been activated\n in the warehouse settings.\n <p>\n Before the document is released, the <code>productionDate</code> must be set.\n <p>\n The <code>packageItems</code> to include is easiest to get by calling\n the method <code>getRequiredProductionParts</code>.",
-        "operationId": "1_create_10",
+        "operationId": "create_10",
         "requestBody": {
           "content": {
             "*/*": {
@@ -33570,7 +33581,7 @@
         "x-fn-is-public": "true"
       },
       "post": {
-        "operationId": "create_11",
+        "operationId": "1_create_11",
         "requestBody": {
           "content": {
             "*/*": {
@@ -33824,7 +33835,7 @@
     },
     "/api/warehouse/purchaseorders-v1/{id}": {
       "get": {
-        "operationId": "1_get_17",
+        "operationId": "get_17",
         "parameters": [
           {
             "description": "Purchase order id.",
@@ -34416,7 +34427,7 @@
       },
       "post": {
         "description": "<p>\n Both <code>code</code> and <code>name</code> are mandatory.\n <p>\n If you want to set a custom delivery address for this stock point,\n you must remember to set <code>usingCompanyAddress</code> to <code>false</code>.\n <p>\n Returns 400 <code>alreadyexists</code> if a stock point with same code already exists.\n <p>\n Returns 400 <code>duplicatestocklocations</code> if two or more stock locations have the same code.",
-        "operationId": "create_3",
+        "operationId": "1_create_3",
         "requestBody": {
           "content": {
             "application/json": {
@@ -34828,7 +34839,7 @@
       },
       "post": {
         "description": "<p>\n Create a new Stock Taking document.\n The only mandatory fields are <code>name</code> and <code>responsible</code>.\n <code>state</code> will be set to <code>planning</code> for a newly created document.\n <p>\n The <code>date</code>-field is not mandatory for documents in state <code>planning</code>.\n However, when you update the state to <code>started</code> you have to provide a date.\n\n <code>name</code> is a descriptive name of the stock taking.\n\n <code>responsible</code> is the name of the responsible for the stock taking.\n\n <code>rows</code> are added after creation by using the addRows-method.\n\n <code>projectId</code> and <code>costCenterCode</code> are used for book-keeping, when the\n Stock Taking document is released.\n <p>\n The field <code>usingStockPoints</code> is set from Warehouse system settings upon creation.\n If multiple stockpoints is used, then the rows will be per item-stockPoint-stockLocation.\n If multiple stockpoints is NOT used, then the rows will be per item-stockLocation.",
-        "operationId": "1_create_2",
+        "operationId": "create_2",
         "requestBody": {
           "content": {
             "*/*": {
@@ -34907,7 +34918,7 @@
         "x-fn-is-public": "true"
       },
       "get": {
-        "operationId": "get_2",
+        "operationId": "1_get_2",
         "parameters": [
           {
             "description": "Stock Taking document id.",
@@ -34950,7 +34961,7 @@
       },
       "put": {
         "description": "<p>\n Updates can only be done when state is <code>planning</code> or <code>started</code>.\n <p>\n All updatable fields (<code>date</code>, <code>name</code>, <code>responsible</code>,\n <code>state</code>, <code>sortingId</code>, <code>costCenterCode</code>, <code>projectId</code>)\n in the document head are set to supplied values.\n <p>\n You cannot set <code>state</code> to <code>completed</code> or <code>voided</code>. Use endpoints\n release or void for this.\n <p>\n The <code>date</code>-field is mandatory for documents in state <code>started</code>.\n <p>\n When state is <code>started</code> you use this endpoint for setting the stock taken quantity.\n Only existing rows can be updated - no new rows will be created (use the addRows endpoint for this).\n Only the supplied rows will be updated. I.e. you don't have to send in <strong>all</strong>\n document rows - just supply the rows you want to set stockTakenQuantity for. Just make sure\n to always include all the fields from the document head as mentioned above.\n <p>\n The mandatory fields on the (optionally supplied) rows are: <code>itemId</code>,\n <code>stockPointId</code>, <code>stockLocationId</code>.\n Fields <code>countedBy</code> and <code>stockTakenQuantity</code> are technically\n not mandatory, but will be set to null if you don't supply them.",
-        "operationId": "1_update_2",
+        "operationId": "update_2",
         "parameters": [
           {
             "description": "Stock Taking document id.",
@@ -35735,7 +35746,7 @@
     "/api/warehouse/stocktransfer-v1": {
       "post": {
         "description": "<p>\n Outbounds will be reserved in the from-place.\n Inbounds are created upon release of the stock transfer document.",
-        "operationId": "create_5",
+        "operationId": "1_create_5",
         "requestBody": {
           "content": {
             "application/json": {
@@ -35778,7 +35789,7 @@
     },
     "/api/warehouse/stocktransfer-v1/{id}": {
       "get": {
-        "operationId": "1_get_4",
+        "operationId": "get_4",
         "parameters": [
           {
             "description": "Stock Transfer document id.",
@@ -35998,9 +36009,24 @@
   ],
   "tags": [
     {
-      "description": "Resource for CRUD operations on Pricelists",
-      "name": "fortnox_PriceLists",
-      "x-displayName": "Price Lists"
+      "description": "Voucher resources\n <table>\n     <caption>Possible search params on Vouchers endpoint</caption>\n   <tr>\n\t\t<td><strong>Search</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>lastmodified</td>\n\t\t<td>Retrives Vouchers modified after provided date and time</td>\n   </tr>\n   <tr>\n\t\t<td>costcenter</td>\n\t\t<td>Retrives Vouchers by costcenter</td>\n   </tr>\n   <tr>\n\t\t<td>fromdate</td>\n\t\t<td>Retrives Vouchers starting from provided date</td>\n   </tr>\n   <tr>\n\t\t<td>todate</td>\n\t\t<td>Retrives Vouchers until provided date todate</td>\n   </tr>\n   <tr>\n\t\t<td>voucherseries</td>\n\t\t<td>Retrives Vouchers by Voucher Series</td>\n   </tr>\n </table>\n\n <table>\n     <caption>Possible sort params on Vouchers endpoint</caption>\n   <tr>\n\t\t<td><strong>Sort</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>referencenumber</td>\n\t\t<td>Sorts vouchers according to referencenumber</td>\n   </tr>\n   <tr>\n\t\t<td>referencetype</td>\n\t\t<td>Sorts vouchers according to referencetype</td>\n   </tr>\n   <tr>\n\t\t<td>vouchernumber</td>\n\t\t<td>Sorts vouchers according to vouchernumber</td>\n   </tr>\n   <tr>\n\t\t<td>voucherseries</td>\n\t\t<td>Sorts vouchers according to voucherseries</td>\n   </tr>\n </table>",
+      "name": "fortnox_Vouchers",
+      "x-displayName": "Vouchers"
+    },
+    {
+      "description": "Attendance transactions resources\n <table>\n <caption>Usable &quot;CauseCodes&quot;</caption>\n <tr><td><strong>Code</strong></td><td><strong>Description</strong></td></tr>\n <tr><td>ARB</td><td>Timlön</td></tr>\n <tr><td>BE2</td><td>Beredskapstid 2</td></tr>\n <tr><td>BER or BE1</td><td>Beredskapstid (BE1 is used in PAXml)</td></tr>\n <tr><td>FLX</td><td>Flextid +/-</td></tr>\n <tr><td>HLG</td><td>Helglön</td></tr>\n <tr><td>JO2 or JR2</td><td>Jourtid 2 (JR2 is used in PAXml)</td></tr>\n <tr><td>JOR or JR1</td><td>Jourtid (JR1 is used in PAXml)</td></tr>\n <tr><td>MER</td><td>Mertid</td></tr>\n <tr><td>OB1</td><td>OB-ersättning 1</td></tr>\n <tr><td>OB2</td><td>OB-ersättning 2</td></tr>\n <tr><td>OB3</td><td>OB-ersättning 3</td></tr>\n <tr><td>OB4</td><td>OB-ersättning 4</td></tr>\n <tr><td>OB5</td><td>OB-ersättning 5</td></tr>\n <tr><td>OK0 or NV9</td><td>Extratid \\u2013 Komptid (NV9 is used in PAXml)</td></tr>\n <tr><td>OK1 or ÖK1</td><td>Övertid 1 \\u2013 Komptid (ÖK1 is used in PAXml)</td></tr>\n <tr><td>OK2 or ÖK2</td><td>Övertid 2 \\u2013 Komptid (ÖK2 is used in PAXml)</td></tr>\n <tr><td>OK3 or ÖK3</td><td>Övertid 3 \\u2013 Komptid (ÖK3 is used in PAXml)</td></tr>\n <tr><td>OK4 or ÖK4</td><td>Övertid 4 \\u2013 Komptid (ÖK4 is used in PAXml)</td></tr>\n <tr><td>OK5 or ÖK5</td><td>Övertid 5 \\u2013 Komptid (ÖK5 is used in PAXml)</td></tr>\n <tr><td>OT1 or ÖT1</td><td>Övertid 1 \\u2013 Betalning (ÖT1 is used in PAXml)</td></tr>\n <tr><td>OT2 or ÖT2</td><td>Övertid 2 \\u2013 Betalning (ÖT2 is used in PAXml)</td></tr>\n <tr><td>OT3 or ÖT3</td><td>Övertid 3 \\u2013 Betalning (ÖT3 is used in PAXml)</td></tr>\n <tr><td>OT4 or ÖT4</td><td>Övertid 4 \\u2013 Betalning (ÖT4 is used in PAXml)</td></tr>\n <tr><td>OT5 or ÖT5</td><td>Övertid 5 \\u2013 Betalning (ÖT5 is used in PAXml)</td></tr>\n <tr><td>RES or RE1</td><td>Restid (RE1 is used in PAXml)</td></tr>\n <tr><td>TID</td><td>Arbetstid</td></tr>\n </table>",
+      "name": "fortnox_AttendanceTransactions",
+      "x-displayName": "Attendance Transactions"
+    },
+    {
+      "description": "Resource for the CRUD operations on terms of deliveries",
+      "name": "fortnox_TermsOfDeliveries",
+      "x-displayName": "Terms Of Deliveries"
+    },
+    {
+      "description": "Customers resources",
+      "name": "fortnox_Customers",
+      "x-displayName": "Customers"
     },
     {
       "description": "Supplier invoice payments resources\n <table>\n     <caption>Possible search params on Supplier Invoice Payments endpoint</caption>\n   <tr>\n\t\t<td><strong>Search</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>invoicenumber</td>\n\t\t<td>Retrives supplier invoice payments modified by invoicenumber</td>\n   </tr>\n   <tr>\n\t\t<td>lastmodified</td>\n\t\t<td>Retrives supplier invoice payments modified after provided date and time</td>\n   </tr>\n </table>",
@@ -36008,44 +36034,9 @@
       "x-displayName": "Supplier Invoice Payments"
     },
     {
-      "description": "Voucher file connections resources\n <table>\n     <caption>Possible search params on Voucher file connections endpoint</caption>\n   <tr>\n\t\t<td><strong>Search</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>voucheryear</td>\n\t\t<td>Retrives voucher file connections by voucher year</td>\n   </tr>\n   <tr>\n\t\t<td>voucherdescription</td>\n\t\t<td>Retrives voucher file connections by voucher description</td>\n   </tr>\n   <tr>\n\t\t<td>vouchernumber</td>\n\t\t<td>Retrives voucher file connections by voucher number</td>\n   </tr>\n   <tr>\n\t\t<td>voucherseries</td>\n\t\t<td>Retrives voucher file connections by voucher series</td>\n   </tr>\n </table>",
-      "name": "fortnox_VoucherFileConnections",
-      "x-displayName": "Voucher File Connections"
-    },
-    {
-      "description": "Resource for the CRUD operations on modes of payments",
-      "name": "fortnox_ModesOfPayments",
-      "x-displayName": "Modes Of Payments"
-    },
-    {
-      "description": "Expenses resources",
-      "name": "fortnox_Expenses",
-      "x-displayName": "Expenses"
-    },
-    {
-      "description": "Resource for CRUD operations on Invoice Accruals",
-      "name": "fortnox_InvoiceAccruals",
-      "x-displayName": "Invoice Accruals"
-    },
-    {
-      "description": "Currencies resources",
-      "name": "fortnox_Currencies",
-      "x-displayName": "Currencies"
-    },
-    {
-      "description": "Contract templates resources",
-      "name": "fortnox_ContractTemplates",
-      "x-displayName": "Contract Templates"
-    },
-    {
-      "description": "Labels resources",
-      "name": "fortnox_Labels",
-      "x-displayName": "Labels"
-    },
-    {
-      "description": "Schedule times resources",
-      "name": "fortnox_ScheduleTimes",
-      "x-displayName": "Schedule Times"
+      "description": "<b>Note!</b> if you are sending the invoice with Fortnox Finans, check out the <a href=\"/apidocs#tag/FinanceInvoicesResource\">Finance Invoices</a> section\n\n <table>\n     <caption>Possible filters on Invoice endpoint</caption>\n   <tr>\n\t\t<td><strong>Filter</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>cancelled</td>\n\t\t<td>Retrieves all invoices with the status &quot;cancelled&quot;.</td>\n   </tr>\n   <tr>\n\t\t<td>fullypaid</td>\n\t\t<td>Retrieves all invoices that has been fully paid.</td>\n\t </tr>\n\t <tr>\n\t\t<td>unpaid</td>\n\t\t<td>Retrieves all invoices that is unpaid.</td>\n   </tr>\n\t <tr>\n\t\t<td>unpaidoverdue</td>\n\t\t<td>Retrieves all invoices that is unpaid and overdue.</td>\n   </tr>\n\t <tr>\n\t\t<td>unbooked</td>\n\t\t<td>Retrieves all invoices that is unbooked.</td>\n   </tr>\n </table>",
+      "name": "fortnox_Invoices",
+      "x-displayName": "Invoices"
     },
     {
       "description": "Financial years resources",
@@ -36053,9 +36044,24 @@
       "x-displayName": "Financial Years"
     },
     {
-      "description": "Employees resources",
-      "name": "fortnox_Employees",
-      "x-displayName": "Employees"
+      "description": "Customer references resource.",
+      "name": "fortnox_CustomerReferences",
+      "x-displayName": "Customer References"
+    },
+    {
+      "description": "Resource for CRUD operations on Pricelists",
+      "name": "fortnox_PriceLists",
+      "x-displayName": "Price Lists"
+    },
+    {
+      "description": "Resource for the CRUD operations on terms of payments",
+      "name": "fortnox_TermsOfPayments",
+      "x-displayName": "Terms Of Payments"
+    },
+    {
+      "description": "Invoice payments resources",
+      "name": "fortnox_InvoicePayments",
+      "x-displayName": "Invoice Payments"
     },
     {
       "description": "Units resources",
@@ -36068,64 +36074,9 @@
       "x-displayName": "Supplier Invoices"
     },
     {
-      "description": "Fortnox Finans Invoice resources\n <p>\n These endpoints are useful when transferring an invoice to Fortnox Finans factoring service. When Fortnox Finans has taken over the responsibility for collecting the invoice - the actual invoice, reminders, collections etc (depending on settings) are automatically sent to the customer on the selected media.\n <p>\n <b>Important before you start</b> Please note that you need to get a special sandbox instance of Fortnox to test Fortnox Finans services, if you are using a production sandbox, it will send out invoices and start the reminder process and charge you for the service.\n <p>\n <b>Also note</b> that older invoices (typically dated before 2020-04) might be handled in &quot;Noxbox&quot;, a platform previously used for administering invoices sent using Fortnox Finans' services. If this platform has been used for an invoice, some endpoints described below will not be available. In the &quot;Retrieve a Fortnox Finans invoice&quot; section it&rsquo;s described how to determine if the old &quot;Noxbox&quot; platform was used.\n <p>\n <b>Type of services</b>\n <p>\n A Fortnox user can let Fortnox Finans handle their customer ledger.\n Fortnox Finans currently offers two types of services\n <p>\n <i>Ledgerbase</i>\n <p>\n Depending on customer settings, two subtypes of the service are available:\n <ul>\n     <li>Invoice service <u>with</u> automatic reminders: this means that Fortnox Finans is sending\n     invoices to end-customers and handling the customer ledger with reminders and collection.\n     This service is also referred to as &quot;Service Full&quot;</li>\n     <li>Invoice service <u>without</u> automatic reminders: this means that Fortnox Finans is sending\n     invoices to end-customers and handling the customer ledger. No reminders or collections\n     are sent. This service is also referred to as &quot;Service Light&quot;</li>\n </ul>\n <i>Reminder</i>\n <p>\n <ul>\n     <li>Reminder service: this means that Fortnox Finans is sending reminders and collections on\n     invoices already sent from Fortnox (without any Fortnox Finans services). The invoice is\n     transferred to Fortnox Finans, and from now on reminders etc will automatically be sent\n     to the customer. The invoice has to be unpaid, and the due date must be passed.<br>\n     An invoice sent by Ledgerbase (without automatic reminders) could be transferred to\n     Reminder service.</li>\n </ul>\n <p>\n <b>Preconditions</b>\n <p>\n <i>General</i>\n <p>\n Scope of your application registered to Fortnox must contain &quot;Invoice Noxfinans&quot;\n Fortnox Finans services must have been activated in the client database\n <p>\n <i>Invoices</i>\n <p>\n <ul>\n     <li>Invoice must have been created in Fortnox (Manually or by API)</li>\n     <li>Invoice must have an open balance >0</li>\n     <li>Invoice date is not allowed to be older than two years</li>\n     <li>Currency of Invoice must be in SEK</li>\n     <li>Invoice contains at least name, address, zip and city</li>\n     <li>Invoice must contain at least one invoice record</li>\n     <li>Interest invoices are not permitted to be sent to Fortnox Finans</li>\n </ul>\n <p>\n <i>Credit Invoices</i>\n <p>\n Credit Invoice in Fortnox must have a connection to a debit invoice\n Debit invoice must have a open balance >= credit invoice amount\n <p>\n <i>Authentication</i>\n <p>\n To be able to use the endpoints, valid authentication must be provided.\n These are provided by Fortnox Finans when setting up the external api connection.\n <p>\n An <b>access token</b> (in the examples below stated as my_access_token) must be provided in\n the header of the request.\n <p>\n A <b>client secret</b> (in the examples below stated as my_client_secret) must be provided in the header of the request.\n <p>\n <b>Example</b>\n <p>\n <i>Request</i><br>\n curl -X &quot;GET&quot; &quot;https://api.fortnox.se/3/noxfinansinvoices/7201&quot;<br>\n      -H &quot;Access-Token: <b>my_access_token</b>&quot;<br>\n      -H &quot;Client-Secret: <b>my_client_secret</b>&quot;<br>\n      -H &quot;Content-Type: application/json&quot;<br>\n      -H &quot;Accept: application/json&quot;",
-      "name": "fortnox_FinanceInvoices",
-      "x-displayName": "Finance Invoices"
-    },
-    {
       "description": "Supplier Invoice External URL Connections resource\n Note: Requires a supplier invoice file attachment to be visible in Fortnox GUI.",
       "name": "fortnox_SupplierInvoiceExternalUrlConnections",
       "x-displayName": "Supplier Invoice External Url Connections"
-    },
-    {
-      "description": "<table>\n     <caption>Possible filters on Offers endpoint</caption>\n <tr>\n <td><strong>Filter</strong></td>\n <td><strong>Description</strong></td>\n </tr>\n <tr>\n <td>cancelled</td>\n <td>Retrieves all offers with the status &quot;cancelled&quot;</td>\n </tr>\n <tr>\n <td>expired</td>\n <td>Retrieves all offers that has been expired</td>\n </tr>\n <tr>\n <td>completed</td>\n <td>Retrieves all offers where an order or invoice has been created</td>\n </tr>\n <tr>\n <td>notcompleted</td>\n <td>Retrieves all offers where an order or invoice has not been created</td>\n </tr>\n <tr>\n <td>ordercreated</td>\n <td>Retrieves all offers where an order has been created</td>\n </tr>\n <tr>\n <td>ordernotcreated</td>\n <td>Retrieves all offers where an order has not been created</td>\n </tr>\n </table>",
-      "name": "fortnox_Offers",
-      "x-displayName": "Offers"
-    },
-    {
-      "description": "Salary Transaction resources<br>\n Usable SalaryCodes:<br>\n You can get a list of usable salary codes in the GUI from Register, Lönearter och koder &minus; Lönearter by choosing one of two tables and pressing print.<br>\n Depending on which salary code table (löneartstabell) that is set in the settings (Inställningar, Lön, Avtal för arbetare/tjänsteman &minus; Allmänt) you can choose the salary code to use from either salary code table.<br>\n Make sure to use the correct table that is used for the employee PersonelType you want to sent the salary transaction for. Some salary codes do not exist in every table.",
-      "name": "fortnox_SalaryTransactions",
-      "x-displayName": "Salary Transactions"
-    },
-    {
-      "description": "Asset file connections resources",
-      "name": "fortnox_AssetFileConnection",
-      "x-displayName": "Asset File Connection"
-    },
-    {
-      "description": "Archive resources",
-      "name": "fortnox_Archive",
-      "x-displayName": "Archive"
-    },
-    {
-      "description": "Account charts resources",
-      "name": "fortnox_AccountCharts",
-      "x-displayName": "Account Charts"
-    },
-    {
-      "description": "<table>\n     <caption>Note that Inbox has nine static folders in the root directory.</caption>\n     <tr><td><strong>Path</strong></td><td><strong>Description</strong></td></tr>\n     <tr><td>Inbox_a</td><td>Asset register</td></tr>\n     <tr><td>Inbox_d</td><td>Daily takings</td></tr>\n     <tr><td>Inbox_s</td><td>Supplier invoices</td></tr>\n     <tr><td>Inbox_v</td><td>Vouchers</td></tr>\n     <tr><td>Inbox_b</td><td>Bank files</td></tr>\n     <tr><td>Inbox_l</td><td>Payroll files</td></tr>\n     <tr><td>Inbox_kf</td><td>Customer invoices</td></tr>\n     <tr><td>Inbox_o</td><td>Orders</td></tr>\n     <tr><td>Inbox_of</td><td>Offers</td></tr>\n </table>",
-      "name": "fortnox_Inbox",
-      "x-displayName": "Inbox"
-    },
-    {
-      "description": "Articles resources",
-      "name": "fortnox_Articles",
-      "x-displayName": "Articles"
-    },
-    {
-      "description": "EU vat limit regulation resources",
-      "name": "fortnox_EUVatLimitRegulation",
-      "x-displayName": "EU Vat Limit Regulation"
-    },
-    {
-      "description": "Resource for the CRUD operations on supplier invoice accruals",
-      "name": "fortnox_SupplierInvoiceAccruals",
-      "x-displayName": "Supplier Invoice Accruals"
-    },
-    {
-      "description": "<b>Note!</b> if you are sending the invoice with Fortnox Finans, check out the <a href=\"/apidocs#tag/FinanceInvoicesResource\">Finance Invoices</a> section\n\n <table>\n     <caption>Possible filters on Invoice endpoint</caption>\n   <tr>\n\t\t<td><strong>Filter</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>cancelled</td>\n\t\t<td>Retrieves all invoices with the status &quot;cancelled&quot;.</td>\n   </tr>\n   <tr>\n\t\t<td>fullypaid</td>\n\t\t<td>Retrieves all invoices that has been fully paid.</td>\n\t </tr>\n\t <tr>\n\t\t<td>unpaid</td>\n\t\t<td>Retrieves all invoices that is unpaid.</td>\n   </tr>\n\t <tr>\n\t\t<td>unpaidoverdue</td>\n\t\t<td>Retrieves all invoices that is unpaid and overdue.</td>\n   </tr>\n\t <tr>\n\t\t<td>unbooked</td>\n\t\t<td>Retrieves all invoices that is unbooked.</td>\n   </tr>\n </table>",
-      "name": "fortnox_Invoices",
-      "x-displayName": "Invoices"
     },
     {
       "description": "Contracts resources\n <table>\n     <caption>Possible filters on Contracts endpoint</caption>\n   <tr>\n\t\t<td><strong>Filter</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>active</td>\n\t\t<td>Retrieves all active contracts</td>\n   </tr>\n   <tr>\n\t\t<td>inactive</td>\n\t\t<td>Retrieves all inactive contracts</td>\n\t </tr>\n\t <tr>\n\t\t<td>finished</td>\n\t\t<td>Retrieves all finished contracts</td>\n   </tr>\n </table>\n Possible values for filter",
@@ -36133,79 +36084,24 @@
       "x-displayName": "Contracts"
     },
     {
-      "description": "Accounts resources",
-      "name": "fortnox_Accounts",
-      "x-displayName": "Accounts"
+      "description": "Schedule times resources",
+      "name": "fortnox_ScheduleTimes",
+      "x-displayName": "Schedule Times"
     },
     {
-      "description": "Predefined Accounts resources",
-      "name": "fortnox_PredefinedAccounts",
-      "x-displayName": "Predefined Accounts"
+      "description": "Asset file connections resources",
+      "name": "fortnox_AssetFileConnection",
+      "x-displayName": "Asset File Connection"
     },
     {
-      "description": "Resource for the CRUD operations on terms of payments",
-      "name": "fortnox_TermsOfPayments",
-      "x-displayName": "Terms Of Payments"
+      "description": "Currencies resources",
+      "name": "fortnox_Currencies",
+      "x-displayName": "Currencies"
     },
     {
-      "description": "Company settings resource",
-      "name": "fortnox_CompanySettings",
-      "x-displayName": "Company Settings"
-    },
-    {
-      "description": "Asset types resource",
-      "name": "fortnox_AssetTypes",
-      "x-displayName": "Asset Types"
-    },
-    {
-      "description": "Absence transactions resources.\n <table>\n <caption>Usable &quot;CauseCodes&quot;</caption>\n <tr><td><strong>Code</strong></td><td><strong>Description</strong></td></tr>\n <tr><td>ASK</td><td>Arbetsskada</td></tr>\n <tr><td>ATF</td><td>Arbetstidsförkortning</td></tr>\n <tr><td>FPE</td><td>Föräldraledig</td></tr>\n <tr><td>FRA or FR1</td><td>Frånvaro övrigt (FR1 is used in PAXml)</td></tr>\n <tr><td>HAV</td><td>Graviditetspenning</td></tr>\n <tr><td>KOM</td><td>Kompledig</td></tr>\n <tr><td>MIL</td><td>Militärtjänst (max 60 dagar)</td></tr>\n <tr><td>NAR or NÄR</td><td>Närståendevård (NÄR is used in PAXml)</td></tr>\n <tr><td>OS1</td><td>Sjuk-OB 1</td></tr>\n <tr><td>OS2</td><td>Sjuk-OB 2</td></tr>\n <tr><td>OS3</td><td>Sjuk-OB 3</td></tr>\n <tr><td>OS4</td><td>Sjuk-OB 4</td></tr>\n <tr><td>OS5</td><td>Sjuk-OB 5</td></tr>\n <tr><td>PAP</td><td>Pappadagar</td></tr>\n <tr><td>PEM</td><td>Permission</td></tr>\n <tr><td>PER</td><td>Permitterad</td></tr>\n <tr><td>SEM</td><td>Semester</td></tr>\n <tr><td>SJK</td><td>Sjukfrånvaro</td></tr>\n <tr><td>SMB</td><td>Smittbärare</td></tr>\n <tr><td>SVE</td><td>Svenska för invandrare</td></tr>\n <tr><td>TJL</td><td>Tjänstledig</td></tr>\n <tr><td>UTB or FAC</td><td>Facklig utbildning (FAC is used in PAXml)</td></tr>\n <tr><td>VAB</td><td>Vård av barn</td></tr>\n </table>",
-      "name": "fortnox_AbsenceTransactions",
-      "x-displayName": "Absence Transactions"
-    },
-    {
-      "description": "Me resource",
-      "name": "fortnox_Me",
-      "x-displayName": "Me"
-    },
-    {
-      "description": "Filters\n <table>\n     <caption>Possible filters on SIE endpoint</caption>\n <tr>\n <td>Type</td>\n <td>Description</td>\n </tr>\n <tr>\n <td>FinancialYear</td>\n <td>Retreives the SIE-files for the specific financial year</td>\n </tr>\n <tr>\n <td>Example:</td>\n <td>https://api.fortnox.se/3/sie/4?financialyear=1</td>\n </tr>\n </table>",
-      "name": "fortnox_Sie",
-      "x-displayName": "Sie"
-    },
-    {
-      "description": "Resource for CRUD operations on Supplier invoice file connections",
-      "name": "fortnox_SupplierInvoiceFileConnections",
-      "x-displayName": "Supplier Invoice File Connections"
-    },
-    {
-      "description": "Cost centers resources\n <table>\n     <caption>Possible search params on Cost Centers endpoint</caption>\n   <tr>\n\t\t<td><strong>Search</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>lastmodified</td>\n\t\t<td>Retrives costcenters modified after provided date and time</td>\n   </tr>\n </table>\n\n <table>\n     <caption>Possible sort params on Cost Centers endpoint</caption>\n   <tr>\n\t\t<td><strong>Sort</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>code</td>\n\t\t<td>Sorts cost centers according to code</td>\n   </tr>\n </table>",
-      "name": "fortnox_CostCenters",
-      "x-displayName": "Cost Centers"
-    },
-    {
-      "description": "Resource for the CRUD operations on projects",
-      "name": "fortnox_Projects",
-      "x-displayName": "Projects"
-    },
-    {
-      "description": "Company information resource",
-      "name": "fortnox_CompanyInformation",
-      "x-displayName": "Company Information"
-    },
-    {
-      "description": "Resource for the CRUD operations on terms of deliveries",
-      "name": "fortnox_TermsOfDeliveries",
-      "x-displayName": "Terms Of Deliveries"
-    },
-    {
-      "description": "Tax reductions resources\n <table>\n     <caption>Possible filters</caption>\n     <tr>\n         <td><strong>Filter</strong></td>\n         <td><strong>Description</strong></td>\n     </tr>\n     <tr>\n \t\t   <td>invoices</td>\n \t\t   <td>Retrieves all Tax reductions for invoices</td>\n     </tr>\n     <tr>\n         <td>orders</td>\n         <td>Retrieves all Tax reductions for orders</td>\n     </tr>\n \t   <tr>\n \t       <td>offers</td>\n \t       <td>Retrieves all Tax reductions for offers</td>\n     </tr>\n </table>",
-      "name": "fortnox_TaxReductions",
-      "x-displayName": "Tax Reductions"
-    },
-    {
-      "description": "Voucher Series resources\n <table>\n     <caption>Possible search params on Voucher Series endpoint</caption>\n   <tr>\n\t\t<td><strong>Search</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>lastmodified</td>\n\t\t<td>Retrives Voucher Series modified after provided date and time</td>\n   </tr>\n </table>\n\n <table>\n     <caption>Possible sort params on Voucher Series endpoint</caption>\n   <tr>\n\t\t<td><strong>Sort</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>code</td>\n\t\t<td>Sorts Voucher Series according to code</td>\n   </tr>\n </table>",
-      "name": "fortnox_VoucherSeries",
-      "x-displayName": "Voucher Series"
+      "description": "Archive resources",
+      "name": "fortnox_Archive",
+      "x-displayName": "Archive"
     },
     {
       "description": "Resource for the CRUD operations on trusted email senders",
@@ -36213,29 +36109,29 @@
       "x-displayName": "Trusted Email Senders"
     },
     {
-      "description": "Attendance transactions resources\n <table>\n <caption>Usable &quot;CauseCodes&quot;</caption>\n <tr><td><strong>Code</strong></td><td><strong>Description</strong></td></tr>\n <tr><td>ARB</td><td>Timlön</td></tr>\n <tr><td>BE2</td><td>Beredskapstid 2</td></tr>\n <tr><td>BER or BE1</td><td>Beredskapstid (BE1 is used in PAXml)</td></tr>\n <tr><td>FLX</td><td>Flextid +/-</td></tr>\n <tr><td>HLG</td><td>Helglön</td></tr>\n <tr><td>JO2 or JR2</td><td>Jourtid 2 (JR2 is used in PAXml)</td></tr>\n <tr><td>JOR or JR1</td><td>Jourtid (JR1 is used in PAXml)</td></tr>\n <tr><td>MER</td><td>Mertid</td></tr>\n <tr><td>OB1</td><td>OB-ersättning 1</td></tr>\n <tr><td>OB2</td><td>OB-ersättning 2</td></tr>\n <tr><td>OB3</td><td>OB-ersättning 3</td></tr>\n <tr><td>OB4</td><td>OB-ersättning 4</td></tr>\n <tr><td>OB5</td><td>OB-ersättning 5</td></tr>\n <tr><td>OK0 or NV9</td><td>Extratid \\u2013 Komptid (NV9 is used in PAXml)</td></tr>\n <tr><td>OK1 or ÖK1</td><td>Övertid 1 \\u2013 Komptid (ÖK1 is used in PAXml)</td></tr>\n <tr><td>OK2 or ÖK2</td><td>Övertid 2 \\u2013 Komptid (ÖK2 is used in PAXml)</td></tr>\n <tr><td>OK3 or ÖK3</td><td>Övertid 3 \\u2013 Komptid (ÖK3 is used in PAXml)</td></tr>\n <tr><td>OK4 or ÖK4</td><td>Övertid 4 \\u2013 Komptid (ÖK4 is used in PAXml)</td></tr>\n <tr><td>OK5 or ÖK5</td><td>Övertid 5 \\u2013 Komptid (ÖK5 is used in PAXml)</td></tr>\n <tr><td>OT1 or ÖT1</td><td>Övertid 1 \\u2013 Betalning (ÖT1 is used in PAXml)</td></tr>\n <tr><td>OT2 or ÖT2</td><td>Övertid 2 \\u2013 Betalning (ÖT2 is used in PAXml)</td></tr>\n <tr><td>OT3 or ÖT3</td><td>Övertid 3 \\u2013 Betalning (ÖT3 is used in PAXml)</td></tr>\n <tr><td>OT4 or ÖT4</td><td>Övertid 4 \\u2013 Betalning (ÖT4 is used in PAXml)</td></tr>\n <tr><td>OT5 or ÖT5</td><td>Övertid 5 \\u2013 Betalning (ÖT5 is used in PAXml)</td></tr>\n <tr><td>RES or RE1</td><td>Restid (RE1 is used in PAXml)</td></tr>\n <tr><td>TID</td><td>Arbetstid</td></tr>\n </table>",
-      "name": "fortnox_AttendanceTransactions",
-      "x-displayName": "Attendance Transactions"
+      "description": "Contract templates resources",
+      "name": "fortnox_ContractTemplates",
+      "x-displayName": "Contract Templates"
     },
     {
-      "description": "Article url connections resources",
-      "name": "fortnox_ArticleUrlConnections",
-      "x-displayName": "Article Url Connections"
+      "description": "Account charts resources",
+      "name": "fortnox_AccountCharts",
+      "x-displayName": "Account Charts"
     },
     {
-      "description": "Customer references resource.",
-      "name": "fortnox_CustomerReferences",
-      "x-displayName": "Customer References"
+      "description": "Salary Transaction resources<br>\n Usable SalaryCodes:<br>\n You can get a list of usable salary codes in the GUI from Register, Lönearter och koder &minus; Lönearter by choosing one of two tables and pressing print.<br>\n Depending on which salary code table (löneartstabell) that is set in the settings (Inställningar, Lön, Avtal för arbetare/tjänsteman &minus; Allmänt) you can choose the salary code to use from either salary code table.<br>\n Make sure to use the correct table that is used for the employee PersonelType you want to sent the salary transaction for. Some salary codes do not exist in every table.",
+      "name": "fortnox_SalaryTransactions",
+      "x-displayName": "Salary Transactions"
     },
     {
-      "description": "Vacation Debt Basis resources",
-      "name": "fortnox_VacationDebtBasis",
-      "x-displayName": "Vacation Debt Basis"
+      "description": "<table>\n     <caption>Possible filters on Offers endpoint</caption>\n <tr>\n <td><strong>Filter</strong></td>\n <td><strong>Description</strong></td>\n </tr>\n <tr>\n <td>cancelled</td>\n <td>Retrieves all offers with the status &quot;cancelled&quot;</td>\n </tr>\n <tr>\n <td>expired</td>\n <td>Retrieves all offers that has been expired</td>\n </tr>\n <tr>\n <td>completed</td>\n <td>Retrieves all offers where an order or invoice has been created</td>\n </tr>\n <tr>\n <td>notcompleted</td>\n <td>Retrieves all offers where an order or invoice has not been created</td>\n </tr>\n <tr>\n <td>ordercreated</td>\n <td>Retrieves all offers where an order has been created</td>\n </tr>\n <tr>\n <td>ordernotcreated</td>\n <td>Retrieves all offers where an order has not been created</td>\n </tr>\n </table>",
+      "name": "fortnox_Offers",
+      "x-displayName": "Offers"
     },
     {
-      "description": "Contract accruals resources",
-      "name": "fortnox_ContractAccruals",
-      "x-displayName": "Contract Accruals"
+      "description": "Resource for the CRUD operations on modes of payments",
+      "name": "fortnox_ModesOfPayments",
+      "x-displayName": "Modes Of Payments"
     },
     {
       "description": "Resource for CRUD operations on prices",
@@ -36243,19 +36139,29 @@
       "x-displayName": "Prices"
     },
     {
-      "description": "Article file connections resources",
-      "name": "fortnox_ArticleFileConnections",
-      "x-displayName": "Article File Connections"
+      "description": "Resource for CRUD operations on Supplier invoice file connections",
+      "name": "fortnox_SupplierInvoiceFileConnections",
+      "x-displayName": "Supplier Invoice File Connections"
     },
     {
-      "description": "Resource for CRUD operations on Way of Deliveries",
-      "name": "fortnox_WayOfDeliveries",
-      "x-displayName": "Way Of Deliveries"
+      "description": "Company information resource",
+      "name": "fortnox_CompanyInformation",
+      "x-displayName": "Company Information"
     },
     {
-      "description": "Voucher resources\n <table>\n     <caption>Possible search params on Vouchers endpoint</caption>\n   <tr>\n\t\t<td><strong>Search</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>lastmodified</td>\n\t\t<td>Retrives Vouchers modified after provided date and time</td>\n   </tr>\n   <tr>\n\t\t<td>costcenter</td>\n\t\t<td>Retrives Vouchers by costcenter</td>\n   </tr>\n   <tr>\n\t\t<td>fromdate</td>\n\t\t<td>Retrives Vouchers starting from provided date</td>\n   </tr>\n   <tr>\n\t\t<td>todate</td>\n\t\t<td>Retrives Vouchers until provided date todate</td>\n   </tr>\n   <tr>\n\t\t<td>voucherseries</td>\n\t\t<td>Retrives Vouchers by Voucher Series</td>\n   </tr>\n </table>\n\n <table>\n     <caption>Possible sort params on Vouchers endpoint</caption>\n   <tr>\n\t\t<td><strong>Sort</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>referencenumber</td>\n\t\t<td>Sorts vouchers according to referencenumber</td>\n   </tr>\n   <tr>\n\t\t<td>referencetype</td>\n\t\t<td>Sorts vouchers according to referencetype</td>\n   </tr>\n   <tr>\n\t\t<td>vouchernumber</td>\n\t\t<td>Sorts vouchers according to vouchernumber</td>\n   </tr>\n   <tr>\n\t\t<td>voucherseries</td>\n\t\t<td>Sorts vouchers according to voucherseries</td>\n   </tr>\n </table>",
-      "name": "fortnox_Vouchers",
-      "x-displayName": "Vouchers"
+      "description": "Resource for the CRUD operations on supplier invoice accruals",
+      "name": "fortnox_SupplierInvoiceAccruals",
+      "x-displayName": "Supplier Invoice Accruals"
+    },
+    {
+      "description": "Accounts resources",
+      "name": "fortnox_Accounts",
+      "x-displayName": "Accounts"
+    },
+    {
+      "description": "Voucher file connections resources\n <table>\n     <caption>Possible search params on Voucher file connections endpoint</caption>\n   <tr>\n\t\t<td><strong>Search</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>voucheryear</td>\n\t\t<td>Retrives voucher file connections by voucher year</td>\n   </tr>\n   <tr>\n\t\t<td>voucherdescription</td>\n\t\t<td>Retrives voucher file connections by voucher description</td>\n   </tr>\n   <tr>\n\t\t<td>vouchernumber</td>\n\t\t<td>Retrives voucher file connections by voucher number</td>\n   </tr>\n   <tr>\n\t\t<td>voucherseries</td>\n\t\t<td>Retrives voucher file connections by voucher series</td>\n   </tr>\n </table>",
+      "name": "fortnox_VoucherFileConnections",
+      "x-displayName": "Voucher File Connections"
     },
     {
       "description": "<table>\n     <caption>Possible filters on Orders endpoint</caption>\n <tr>\n <td><strong>Filter</strong></td>\n <td><strong>Description</strong></td>\n </tr>\n <tr>\n <td>cancelled</td>\n <td>Retrieves all orders with the status &quot;cancelled&quot;</td>\n </tr>\n <tr>\n <td>expired</td>\n <td>Retrieves all orders that has been expired</td>\n </tr>\n <tr>\n <td>invoicecreated</td>\n <td>Retrieves all offers where an invoice has been created</td>\n </tr>\n <tr>\n <td>invoicenotcreated</td>\n <td>Retrieves all orders where an invoice has not been created</td>\n </tr>\n </table>\n For information about how to use filters, please read this article.",
@@ -36263,14 +36169,69 @@
       "x-displayName": "Orders"
     },
     {
+      "description": "Tax reductions resources\n <table>\n     <caption>Possible filters</caption>\n     <tr>\n         <td><strong>Filter</strong></td>\n         <td><strong>Description</strong></td>\n     </tr>\n     <tr>\n \t\t   <td>invoices</td>\n \t\t   <td>Retrieves all Tax reductions for invoices</td>\n     </tr>\n     <tr>\n         <td>orders</td>\n         <td>Retrieves all Tax reductions for orders</td>\n     </tr>\n \t   <tr>\n \t       <td>offers</td>\n \t       <td>Retrieves all Tax reductions for offers</td>\n     </tr>\n </table>",
+      "name": "fortnox_TaxReductions",
+      "x-displayName": "Tax Reductions"
+    },
+    {
+      "description": "Vacation Debt Basis resources",
+      "name": "fortnox_VacationDebtBasis",
+      "x-displayName": "Vacation Debt Basis"
+    },
+    {
+      "description": "Absence transactions resources.\n <table>\n <caption>Usable &quot;CauseCodes&quot;</caption>\n <tr><td><strong>Code</strong></td><td><strong>Description</strong></td></tr>\n <tr><td>ASK</td><td>Arbetsskada</td></tr>\n <tr><td>ATF</td><td>Arbetstidsförkortning</td></tr>\n <tr><td>FPE</td><td>Föräldraledig</td></tr>\n <tr><td>FRA or FR1</td><td>Frånvaro övrigt (FR1 is used in PAXml)</td></tr>\n <tr><td>HAV</td><td>Graviditetspenning</td></tr>\n <tr><td>KOM</td><td>Kompledig</td></tr>\n <tr><td>MIL</td><td>Militärtjänst (max 60 dagar)</td></tr>\n <tr><td>NAR or NÄR</td><td>Närståendevård (NÄR is used in PAXml)</td></tr>\n <tr><td>OS1</td><td>Sjuk-OB 1</td></tr>\n <tr><td>OS2</td><td>Sjuk-OB 2</td></tr>\n <tr><td>OS3</td><td>Sjuk-OB 3</td></tr>\n <tr><td>OS4</td><td>Sjuk-OB 4</td></tr>\n <tr><td>OS5</td><td>Sjuk-OB 5</td></tr>\n <tr><td>PAP</td><td>Pappadagar</td></tr>\n <tr><td>PEM</td><td>Permission</td></tr>\n <tr><td>PER</td><td>Permitterad</td></tr>\n <tr><td>SEM</td><td>Semester</td></tr>\n <tr><td>SJK</td><td>Sjukfrånvaro</td></tr>\n <tr><td>SMB</td><td>Smittbärare</td></tr>\n <tr><td>SVE</td><td>Svenska för invandrare</td></tr>\n <tr><td>TJL</td><td>Tjänstledig</td></tr>\n <tr><td>UTB or FAC</td><td>Facklig utbildning (FAC is used in PAXml)</td></tr>\n <tr><td>VAB</td><td>Vård av barn</td></tr>\n </table>",
+      "name": "fortnox_AbsenceTransactions",
+      "x-displayName": "Absence Transactions"
+    },
+    {
+      "description": "Article url connections resources",
+      "name": "fortnox_ArticleUrlConnections",
+      "x-displayName": "Article Url Connections"
+    },
+    {
+      "description": "Predefined Accounts resources",
+      "name": "fortnox_PredefinedAccounts",
+      "x-displayName": "Predefined Accounts"
+    },
+    {
+      "description": "Contract accruals resources",
+      "name": "fortnox_ContractAccruals",
+      "x-displayName": "Contract Accruals"
+    },
+    {
       "description": "Predefined Voucher Series resources",
       "name": "fortnox_PredefinedVoucherSeries",
       "x-displayName": "Predefined Voucher Series"
     },
     {
-      "description": "Customers resources",
-      "name": "fortnox_Customers",
-      "x-displayName": "Customers"
+      "description": "EU vat limit regulation resources",
+      "name": "fortnox_EUVatLimitRegulation",
+      "x-displayName": "EU Vat Limit Regulation"
+    },
+    {
+      "description": "Resource for the CRUD operations on print templates",
+      "name": "fortnox_PrintTemplates",
+      "x-displayName": "Print Templates"
+    },
+    {
+      "description": "Filters\n <table>\n     <caption>Possible filters on SIE endpoint</caption>\n <tr>\n <td>Type</td>\n <td>Description</td>\n </tr>\n <tr>\n <td>FinancialYear</td>\n <td>Retreives the SIE-files for the specific financial year</td>\n </tr>\n <tr>\n <td>Example:</td>\n <td>https://api.fortnox.se/3/sie/4?financialyear=1</td>\n </tr>\n </table>",
+      "name": "fortnox_Sie",
+      "x-displayName": "Sie"
+    },
+    {
+      "description": "Resource for CRUD operations on Invoice Accruals",
+      "name": "fortnox_InvoiceAccruals",
+      "x-displayName": "Invoice Accruals"
+    },
+    {
+      "description": "Voucher Series resources\n <table>\n     <caption>Possible search params on Voucher Series endpoint</caption>\n   <tr>\n\t\t<td><strong>Search</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>lastmodified</td>\n\t\t<td>Retrives Voucher Series modified after provided date and time</td>\n   </tr>\n </table>\n\n <table>\n     <caption>Possible sort params on Voucher Series endpoint</caption>\n   <tr>\n\t\t<td><strong>Sort</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>code</td>\n\t\t<td>Sorts Voucher Series according to code</td>\n   </tr>\n </table>",
+      "name": "fortnox_VoucherSeries",
+      "x-displayName": "Voucher Series"
+    },
+    {
+      "description": "Me resource",
+      "name": "fortnox_Me",
+      "x-displayName": "Me"
     },
     {
       "description": "Assets resources\n <table>\n     <caption>Possible filters on Assets endpoint</caption>\n <tr>\n <td><strong>Name</strong></td>\n <td><strong>Description</strong></td>\n </tr>\n <tr>\n <td>active</td>\n <td>Retrieves all active assets</td>\n </tr>\n <tr>\n <td>inactive</td>\n <td>Retrieves all inactive assets</td>\n </tr>\n <tr>\n <td>fully_depreciated</td>\n <td>Retrieves all fully depreciated assets</td>\n </tr>\n <tr>\n <td>sold</td>\n <td>Retrieves all sold assets</td>\n </tr>\n <tr>\n <td>scrapped</td>\n <td>Retrieves all scrapped assets</td>\n </tr>\n <tr>\n <td>voided</td>\n <td>Retrieves all voided assets</td>\n </tr>\n </table>",
@@ -36283,9 +36244,39 @@
       "x-displayName": "Locked Period"
     },
     {
-      "description": "Resource for the CRUD operations on print templates",
-      "name": "fortnox_PrintTemplates",
-      "x-displayName": "Print Templates"
+      "description": "Fortnox Finans Invoice resources\n <p>\n These endpoints are useful when transferring an invoice to Fortnox Finans factoring service. When Fortnox Finans has taken over the responsibility for collecting the invoice - the actual invoice, reminders, collections etc (depending on settings) are automatically sent to the customer on the selected media.\n <p>\n <b>Important before you start</b> Please note that you need to get a special sandbox instance of Fortnox to test Fortnox Finans services, if you are using a production sandbox, it will send out invoices and start the reminder process and charge you for the service.\n <p>\n <b>Also note</b> that older invoices (typically dated before 2020-04) might be handled in &quot;Noxbox&quot;, a platform previously used for administering invoices sent using Fortnox Finans' services. If this platform has been used for an invoice, some endpoints described below will not be available. In the &quot;Retrieve a Fortnox Finans invoice&quot; section it&rsquo;s described how to determine if the old &quot;Noxbox&quot; platform was used.\n <p>\n <b>Type of services</b>\n <p>\n A Fortnox user can let Fortnox Finans handle their customer ledger.\n Fortnox Finans currently offers two types of services\n <p>\n <i>Ledgerbase</i>\n <p>\n Depending on customer settings, two subtypes of the service are available:\n <ul>\n     <li>Invoice service <u>with</u> automatic reminders: this means that Fortnox Finans is sending\n     invoices to end-customers and handling the customer ledger with reminders and collection.\n     This service is also referred to as &quot;Service Full&quot;</li>\n     <li>Invoice service <u>without</u> automatic reminders: this means that Fortnox Finans is sending\n     invoices to end-customers and handling the customer ledger. No reminders or collections\n     are sent. This service is also referred to as &quot;Service Light&quot;</li>\n </ul>\n <i>Reminder</i>\n <p>\n <ul>\n     <li>Reminder service: this means that Fortnox Finans is sending reminders and collections on\n     invoices already sent from Fortnox (without any Fortnox Finans services). The invoice is\n     transferred to Fortnox Finans, and from now on reminders etc will automatically be sent\n     to the customer. The invoice has to be unpaid, and the due date must be passed.<br>\n     An invoice sent by Ledgerbase (without automatic reminders) could be transferred to\n     Reminder service.</li>\n </ul>\n <p>\n <b>Preconditions</b>\n <p>\n <i>General</i>\n <p>\n Scope of your application registered to Fortnox must contain &quot;Invoice Noxfinans&quot;\n Fortnox Finans services must have been activated in the client database\n <p>\n <i>Invoices</i>\n <p>\n <ul>\n     <li>Invoice must have been created in Fortnox (Manually or by API)</li>\n     <li>Invoice must have an open balance >0</li>\n     <li>Invoice date is not allowed to be older than two years</li>\n     <li>Currency of Invoice must be in SEK</li>\n     <li>Invoice contains at least name, address, zip and city</li>\n     <li>Invoice must contain at least one invoice record</li>\n     <li>Interest invoices are not permitted to be sent to Fortnox Finans</li>\n </ul>\n <p>\n <i>Credit Invoices</i>\n <p>\n Credit Invoice in Fortnox must have a connection to a debit invoice\n Debit invoice must have a open balance >= credit invoice amount\n <p>\n <i>Authentication</i>\n <p>\n To be able to use the endpoints, valid authentication must be provided.\n These are provided by Fortnox Finans when setting up the external api connection.\n <p>\n An <b>access token</b> (in the examples below stated as my_access_token) must be provided in\n the header of the request.\n <p>\n A <b>client secret</b> (in the examples below stated as my_client_secret) must be provided in the header of the request.\n <p>\n <b>Example</b>\n <p>\n <i>Request</i><br>\n curl -X &quot;GET&quot; &quot;https://api.fortnox.se/3/noxfinansinvoices/7201&quot;<br>\n      -H &quot;Access-Token: <b>my_access_token</b>&quot;<br>\n      -H &quot;Client-Secret: <b>my_client_secret</b>&quot;<br>\n      -H &quot;Content-Type: application/json&quot;<br>\n      -H &quot;Accept: application/json&quot;",
+      "name": "fortnox_FinanceInvoices",
+      "x-displayName": "Finance Invoices"
+    },
+    {
+      "description": "Resource for CRUD operations on Way of Deliveries",
+      "name": "fortnox_WayOfDeliveries",
+      "x-displayName": "Way Of Deliveries"
+    },
+    {
+      "description": "Cost centers resources\n <table>\n     <caption>Possible search params on Cost Centers endpoint</caption>\n   <tr>\n\t\t<td><strong>Search</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>lastmodified</td>\n\t\t<td>Retrives costcenters modified after provided date and time</td>\n   </tr>\n </table>\n\n <table>\n     <caption>Possible sort params on Cost Centers endpoint</caption>\n   <tr>\n\t\t<td><strong>Sort</strong></td>\n\t\t<td><strong>Description</strong></td>\n   </tr>\n   <tr>\n\t\t<td>code</td>\n\t\t<td>Sorts cost centers according to code</td>\n   </tr>\n </table>",
+      "name": "fortnox_CostCenters",
+      "x-displayName": "Cost Centers"
+    },
+    {
+      "description": "Expenses resources",
+      "name": "fortnox_Expenses",
+      "x-displayName": "Expenses"
+    },
+    {
+      "description": "Employees resources",
+      "name": "fortnox_Employees",
+      "x-displayName": "Employees"
+    },
+    {
+      "description": "Asset types resource",
+      "name": "fortnox_AssetTypes",
+      "x-displayName": "Asset Types"
+    },
+    {
+      "description": "Articles resources",
+      "name": "fortnox_Articles",
+      "x-displayName": "Articles"
     },
     {
       "description": "Resource for the CRUD operations on suppliers",
@@ -36293,9 +36284,29 @@
       "x-displayName": "Suppliers"
     },
     {
-      "description": "Invoice payments resources",
-      "name": "fortnox_InvoicePayments",
-      "x-displayName": "Invoice Payments"
+      "description": "Company settings resource",
+      "name": "fortnox_CompanySettings",
+      "x-displayName": "Company Settings"
+    },
+    {
+      "description": "<table>\n     <caption>Note that Inbox has nine static folders in the root directory.</caption>\n     <tr><td><strong>Path</strong></td><td><strong>Description</strong></td></tr>\n     <tr><td>Inbox_a</td><td>Asset register</td></tr>\n     <tr><td>Inbox_d</td><td>Daily takings</td></tr>\n     <tr><td>Inbox_s</td><td>Supplier invoices</td></tr>\n     <tr><td>Inbox_v</td><td>Vouchers</td></tr>\n     <tr><td>Inbox_b</td><td>Bank files</td></tr>\n     <tr><td>Inbox_l</td><td>Payroll files</td></tr>\n     <tr><td>Inbox_kf</td><td>Customer invoices</td></tr>\n     <tr><td>Inbox_o</td><td>Orders</td></tr>\n     <tr><td>Inbox_of</td><td>Offers</td></tr>\n </table>",
+      "name": "fortnox_Inbox",
+      "x-displayName": "Inbox"
+    },
+    {
+      "description": "Article file connections resources",
+      "name": "fortnox_ArticleFileConnections",
+      "x-displayName": "Article File Connections"
+    },
+    {
+      "description": "Labels resources",
+      "name": "fortnox_Labels",
+      "x-displayName": "Labels"
+    },
+    {
+      "description": "Resource for the CRUD operations on projects",
+      "name": "fortnox_Projects",
+      "x-displayName": "Projects"
     },
     {
       "description": "AttachmentResource\n\n  Attach/Detach files to entities.\n\n  Possible 400 response error codes: no_attachment_provided, mixed_documents, wrong_file_location, wrong_file_type, could_not_retrieve_document,\n  file_too_big, too_many_attachments_in_one_request, max_total_attachments_exceeded, attachment_files_max_count_exceeded,\n  attachment_files_max_size_exceeded, attachment_files_max_pages_exceeded, field_not_writable, mismatch_attachment_id, missing_mandatory_field\n\n  Possible 404 response error codes: file_not_found, document_not_found, attachment_not_found",
@@ -36303,14 +36314,14 @@
       "x-displayName": "Attachment"
     },
     {
-      "description": "IntegrationSalesResource",
-      "name": "integration-developer_IntegrationSales",
-      "x-displayName": "Integration Sales"
-    },
-    {
       "description": "Get ratings data ",
       "name": "integration-developer_Integration Ratings",
       "x-displayName": "Integration Ratings"
+    },
+    {
+      "description": "IntegrationSalesResource",
+      "name": "integration-developer_IntegrationSales",
+      "x-displayName": "Integration Sales"
     },
     {
       "description": "Get sales data from your integrations",
@@ -36328,6 +36339,46 @@
       "x-displayName": "Registrations"
     },
     {
+      "description": "Resource to handle <code>StockPoint</code>s.",
+      "name": "warehouse_StockPoint",
+      "x-displayName": "Stock Point"
+    },
+    {
+      "description": "Handles Custom Inbound Documents.\n\n A Custom Inbound Document is an externally created document\n for registering inbound deliveries to warehouse.",
+      "name": "warehouse_CustomInboundDocument",
+      "x-displayName": "Custom Inbound Document"
+    },
+    {
+      "description": "Handles types for custom documents.\n\n A custom document is identified by its type and id.\n Each type belongs to a category, either INBOUND or OUTBOUND.\n\n Note that custom document types are created automatically\n if necessary when you create custom documents.\n\n The following <code>referenceTypes</code> are not allowed for\n custom document types. Variants of these containing dashes,\n underscores, lower case, upper case etc are not allowed either.\n\n <ul>\n  <li>ARTICLEPRODUCTION</li>\n  <li>ARTIKELPRODUKTION</li>\n  <li>CUSTOMERINVOICE</li>\n  <li>CUSTOMERORDER</li>\n  <li>DELIVERYNOTE</li>\n  <li>FAKTURA</li>\n  <li>F&Ouml;LJESEDEL</li>\n  <li>ING&Aring;ENDESALDO</li>\n  <li>INK&Ouml;P</li>\n  <li>INK&Ouml;PSORDER</li>\n  <li>INVENTERING</li>\n  <li>INVENTORY</li>\n  <li>INVOICE</li>\n  <li>ITEMPRODUCTION</li>\n  <li>KREDITFAKTURA</li>\n  <li>KREDITORDER</li>\n  <li>KUNDFAKTURA</li>\n  <li>KUNDORDER</li>\n  <li>LAGERFLYTT</li>\n  <li>LEGACYINTEGRATIONIN</li>\n  <li>LEGACYINTEGRATIONOUT</li>\n  <li>LEVERANT&Ouml;RSFAKTURA</li>\n  <li>LEVFAKTURA</li>\n  <li>MANUALDELIVERY</li>\n  <li>MANUALINBOUND</li>\n  <li>MANUALINBOUNDDELIVERY</li>\n  <li>MANUALOUTBOUND</li>\n  <li>MANUALOUTBOUNDDELIVERY</li>\n  <li>MANUELLINLEVERANS</li>\n  <li>MANUELLLEVERANS</li>\n  <li>MANUELLUTLEVERANS</li>\n  <li>NEGATIVEOPENINGBALANCES</li>\n  <li>NEGATIVTING&Aring;ENDESALDO</li>\n  <li>ORDER</li>\n  <li>PLOCKLISTA</li>\n  <li>POSITIVEOPENINGBALANCES</li>\n  <li>PRODUCTION</li>\n  <li>PRODUKTION</li>\n  <li>PURCHASE</li>\n  <li>PURCHASEORDER</li>\n  <li>STOCKTAKING</li>\n  <li>STOCKTAKINGDEVIATION</li>\n  <li>STOCKTRANSFER</li>\n  <li>SUPINVOICE</li>\n  <li>SUPPLIERINVOICE</li>\n </ul>",
+      "name": "warehouse_CustomDocumentType",
+      "x-displayName": "Custom Document Type"
+    },
+    {
+      "description": "Handles stock status.",
+      "name": "warehouse_StockStatus",
+      "x-displayName": "Stock Status"
+    },
+    {
+      "description": "General resource for incoming goods.",
+      "name": "warehouse_IncomingGoods",
+      "x-displayName": "Incoming Goods"
+    },
+    {
+      "description": "Handles <code>ManualInboundDocument</code>s",
+      "name": "warehouse_ManualInboundDocument",
+      "x-displayName": "Manual Inbound Document"
+    },
+    {
+      "description": "Handles Purchase Orders",
+      "name": "warehouse_PurchaseOrder",
+      "x-displayName": "Purchase Order"
+    },
+    {
+      "description": "Handles <code>ManualOutboundDocument</code>s",
+      "name": "warehouse_ManualOutboundDocument",
+      "x-displayName": "Manual Outbound Document"
+    },
+    {
       "description": "Handles <code>StockTransferDocument</code>s.\n <p>\n A Stock Transfer moves stock from one location to another.\n You request a quantity to be moved. The quantity is reserved,\n and delivered upon release of the Stock Transfer document.\n The &quot;delivery&quot; makes an inbound delivery to the new\n location.",
       "name": "warehouse_StockTransfer",
       "x-displayName": "Stock Transfer"
@@ -36338,49 +36389,9 @@
       "x-displayName": "Custom Outbound Document"
     },
     {
-      "description": "General resource for incoming goods.",
-      "name": "warehouse_IncomingGoods",
-      "x-displayName": "Incoming Goods"
-    },
-    {
-      "description": "Handles stock status.",
-      "name": "warehouse_StockStatus",
-      "x-displayName": "Stock Status"
-    },
-    {
-      "description": "Handles Purchase Orders",
-      "name": "warehouse_PurchaseOrder",
-      "x-displayName": "Purchase Order"
-    },
-    {
-      "description": "Handles stock taking.\n\n A Stock Taking document is created in state &quot;planning&quot;.\n Rows, containing item-stockpoint-stocklocation combinations to be counted,\n are added to the Stock Taking document.\n\n When the planning is done, the Stock Taking document is updated to state &quot;started&quot;,\n and the stock taking begins.\n\n Setting the stock taken quantity is done by updating the Stock Taking document, and supplying the\n counted rows. This can be done in &quot;batches&quot;, i.e. not all rows needs to be updated at once.\n\n When the stock taking is done, the document is released. The release process will adjust the stock\n for the stock taking date, and prepare the warehouse bookkeeping data.",
-      "name": "warehouse_StockTaking",
-      "x-displayName": "Stock Taking"
-    },
-    {
-      "description": "Resource to handle <code>StockPoint</code>s.",
-      "name": "warehouse_StockPoint",
-      "x-displayName": "Stock Point"
-    },
-    {
-      "description": "Handles types for custom documents.\n\n A custom document is identified by its type and id.\n Each type belongs to a category, either INBOUND or OUTBOUND.\n\n Note that custom document types are created automatically\n if necessary when you create custom documents.\n\n The following <code>referenceTypes</code> are not allowed for\n custom document types. Variants of these containing dashes,\n underscores, lower case, upper case etc are not allowed either.\n\n <ul>\n  <li>ARTICLEPRODUCTION</li>\n  <li>ARTIKELPRODUKTION</li>\n  <li>CUSTOMERINVOICE</li>\n  <li>CUSTOMERORDER</li>\n  <li>DELIVERYNOTE</li>\n  <li>FAKTURA</li>\n  <li>F&Ouml;LJESEDEL</li>\n  <li>ING&Aring;ENDESALDO</li>\n  <li>INK&Ouml;P</li>\n  <li>INK&Ouml;PSORDER</li>\n  <li>INVENTERING</li>\n  <li>INVENTORY</li>\n  <li>INVOICE</li>\n  <li>ITEMPRODUCTION</li>\n  <li>KREDITFAKTURA</li>\n  <li>KREDITORDER</li>\n  <li>KUNDFAKTURA</li>\n  <li>KUNDORDER</li>\n  <li>LAGERFLYTT</li>\n  <li>LEGACYINTEGRATIONIN</li>\n  <li>LEGACYINTEGRATIONOUT</li>\n  <li>LEVERANT&Ouml;RSFAKTURA</li>\n  <li>LEVFAKTURA</li>\n  <li>MANUALDELIVERY</li>\n  <li>MANUALINBOUND</li>\n  <li>MANUALINBOUNDDELIVERY</li>\n  <li>MANUALOUTBOUND</li>\n  <li>MANUALOUTBOUNDDELIVERY</li>\n  <li>MANUELLINLEVERANS</li>\n  <li>MANUELLLEVERANS</li>\n  <li>MANUELLUTLEVERANS</li>\n  <li>NEGATIVEOPENINGBALANCES</li>\n  <li>NEGATIVTING&Aring;ENDESALDO</li>\n  <li>ORDER</li>\n  <li>PLOCKLISTA</li>\n  <li>POSITIVEOPENINGBALANCES</li>\n  <li>PRODUCTION</li>\n  <li>PRODUKTION</li>\n  <li>PURCHASE</li>\n  <li>PURCHASEORDER</li>\n  <li>STOCKTAKING</li>\n  <li>STOCKTAKINGDEVIATION</li>\n  <li>STOCKTRANSFER</li>\n  <li>SUPINVOICE</li>\n  <li>SUPPLIERINVOICE</li>\n </ul>",
-      "name": "warehouse_CustomDocumentType",
-      "x-displayName": "Custom Document Type"
-    },
-    {
       "description": "Handles listing of <code>ManualDocument</code>s.\n <p>\n There are three types of Manual Documents in Warehouse:\n <ul>\n     <li>Manual Inbound Documents,\n     <li>Manual Outbound Documents, and\n     <li>Stock Transfer Documents\n </ul>",
       "name": "warehouse_ManualDocument",
       "x-displayName": "Manual Document"
-    },
-    {
-      "description": "Handles <code>ManualInboundDocument</code>s",
-      "name": "warehouse_ManualInboundDocument",
-      "x-displayName": "Manual Inbound Document"
-    },
-    {
-      "description": "Handles <code>ManualOutboundDocument</code>s",
-      "name": "warehouse_ManualOutboundDocument",
-      "x-displayName": "Manual Outbound Document"
     },
     {
       "description": "Return Warehouse activation status for a tenant.",
@@ -36388,9 +36399,9 @@
       "x-displayName": "Tenant"
     },
     {
-      "description": "Handles Custom Inbound Documents.\n\n A Custom Inbound Document is an externally created document\n for registering inbound deliveries to warehouse.",
-      "name": "warehouse_CustomInboundDocument",
-      "x-displayName": "Custom Inbound Document"
+      "description": "Handles stock taking.\n\n A Stock Taking document is created in state &quot;planning&quot;.\n Rows, containing item-stockpoint-stocklocation combinations to be counted,\n are added to the Stock Taking document.\n\n When the planning is done, the Stock Taking document is updated to state &quot;started&quot;,\n and the stock taking begins.\n\n Setting the stock taken quantity is done by updating the Stock Taking document, and supplying the\n counted rows. This can be done in &quot;batches&quot;, i.e. not all rows needs to be updated at once.\n\n When the stock taking is done, the document is released. The release process will adjust the stock\n for the stock taking date, and prepare the warehouse bookkeeping data.",
+      "name": "warehouse_StockTaking",
+      "x-displayName": "Stock Taking"
     },
     {
       "description": "Handles Production Orders.",
