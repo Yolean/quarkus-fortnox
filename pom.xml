@@ -12,14 +12,14 @@
   </modules>
 
   <properties>
-    <compiler-plugin.version>3.13.0</compiler-plugin.version>
+    <compiler-plugin.version>3.14.0</compiler-plugin.version>
     <failsafe-plugin.version>${surefire-plugin.version}</failsafe-plugin.version>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <quarkus.version>3.19.3</quarkus.version>
-    <surefire-plugin.version>3.5.0</surefire-plugin.version>
-    <quarkus-openapi-generator.version>2.9.0</quarkus-openapi-generator.version>
+    <quarkus.version>3.23.2</quarkus.version>
+    <surefire-plugin.version>3.5.3</surefire-plugin.version>
+    <quarkus-openapi-generator.version>2.10.0</quarkus-openapi-generator.version>
   </properties>
 
   <distributionManagement>
