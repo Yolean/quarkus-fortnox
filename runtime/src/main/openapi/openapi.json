@@ -6187,10 +6187,6 @@
             "minimum": 1000,
             "type": "integer"
           },
-          "EuAccount": {
-            "format": "int32",
-            "type": "integer"
-          },
           "EuVatAccount": {
             "format": "int32",
             "type": "integer"
@@ -6240,10 +6236,6 @@
             "format": "int32",
             "maximum": 99999,
             "minimum": 1000,
-            "type": "integer"
-          },
-          "EuAccount": {
-            "format": "int32",
             "type": "integer"
           },
           "EuVatAccount": {
@@ -11434,6 +11426,7 @@
         "properties": {
           "Invoice": {
             "enum": [
+              "ELECTRONICINVOICE",
               "PRINT",
               "EMAIL",
               "PRINTSERVICE"
@@ -11463,6 +11456,7 @@
         "properties": {
           "Invoice": {
             "enum": [
+              "ELECTRONICINVOICE",
               "PRINT",
               "EMAIL",
               "PRINTSERVICE"
@@ -14704,7 +14698,8 @@
             "enum": [
               "CASH",
               "CARD",
-              "AG"
+              "AG",
+              ""
             ],
             "type": "string"
           },
@@ -15608,7 +15603,8 @@
             "enum": [
               "CASH",
               "CARD",
-              "AG"
+              "AG",
+              ""
             ],
             "type": "string"
           },
@@ -18637,9 +18633,6 @@
             "type": "string"
           },
           "Value": {
-            "type": "string"
-          },
-          "value": {
             "type": "string"
           }
         },
